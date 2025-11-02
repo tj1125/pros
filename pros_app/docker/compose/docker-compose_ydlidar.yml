@@ -1,0 +1,16 @@
+services:
+  rplidar:
+    image: ghcr.io/otischung/pros_ai_image:latest
+    env_file:
+      - .env
+    devices:
+      - "/dev/usb_ydlidar:/dev/usb_ydlidar"
+    volumes:
+      - ./demo:/workspace/demo:ro
+    networks:
+      - cube_bridge_network
+    command: "ros2 launch /workspace/demo/ydlidar.py.launch"
+
+networks:
+  cube_bridge_network:
+    driver: bridge
